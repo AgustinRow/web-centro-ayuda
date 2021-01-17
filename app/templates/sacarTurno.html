@@ -1,0 +1,62 @@
+{% extends 'listado_usuarios.html' %}
+{% block title %}
+    Usuarios
+{% endblock %}
+{% block head %}
+{{super()}}
+<link rel="stylesheet" href="{{ url_for('static', filename='style_edicionUsuarios.css') }}" />
+{% endblock %}
+{% block main_frame %}
+<p class="cartel">SACAR TURNO</p>
+
+<div class="modal-dialog text-center"> 
+  <div>
+    {% with messages= get_flashed_messages()%}
+      {% if messages %}
+        {% for messages in messages%}
+          <div class="alert alert-danger" role="alert">
+            {{ messages }}
+          </div>
+        {% endfor %}  
+      {% endif %}     
+    {% endwith %}
+  </div> 
+      <div class="modal-content">
+          <form action="{{ url_for('turno_nuevo', idCentro=centro.id)}}" class="col-12" method="POST">
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label style="margin-top: 15px;"> Email * </label>
+                 <br><input type="email" placeholder="Correo Electronico" required class="form-control" name="email">
+
+                <label style="margin-top: 15px;"> Telefono </label>
+                <br><input type="number" placeholder="Telefono (Opcional)" class="form-control" name="telefono">
+              </div>
+            </div>  
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label> Turno * </label><br>
+                <select style="width: 100%; text-align: center;" name="turno">
+                  {% for each in turnos %}
+                    <option>{{each}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <hr>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label><b style="text-decoration: underline;">INFORMACION DEL CENTRO</b></label>
+                <div style="display: flex; justify-content: center;">
+                  <div style="text-align: left;">
+                      <p><b>Nombre: </b>{{centro.nombre}}</p>
+                      <p><b>Municipio: </b>{{centro.municipio}}</p>
+                      <p><b>Direccion: </b>{{centro.direccion}}</p>
+                  </div>
+                </div>
+              </div>
+            </div> 
+              <br><button class="btn btn-info" type="submit" name="submit">GUARDAR</button><br><br>
+          </form>
+      </div>
+
+{% endblock %}

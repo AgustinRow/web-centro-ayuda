@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block title %}
+    Usuarios
+{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='style_listadoCentros.css') }}" />
+{% endblock %}
+{% block main_frame %}
+<p class="cartel">Listado de Turnos del Centro: {{centro.nombre}}</p>
+<div class="formContainer" style="margin-top: 25px;">
+    {% with errors= get_flashed_messages(category_filter=["error"])%}
+        {% if errors %}
+            {% for messages in errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ messages }}
+                </div>
+            {% endfor %}
+        {% endif %}     
+    {% endwith %}
+    {% with success= get_flashed_messages(category_filter=["success"])%}
+        {% if success %}
+            {% for messages in success %}
+                <div class="alert alert-success" role="alert">
+                    {{ messages }}
+                </div>
+            {% endfor %}
+        {% endif %}     
+    {% endwith %}
+    {% with warning= get_flashed_messages(category_filter=["warning"])%}
+        {% if warning %}
+            {% for messages in warning %}
+                <div class="alert alert-warning" role="alert">
+                    {{ messages }}
+                </div>
+            {% endfor %}
+        {% endif %}     
+    {% endwith %}
+</div>
+<div style="text-align: center;">
+    <a class="btn btn-outline-primary" role="button" href="{{url_for('formTurno', idCentro=idCentro)}}" method= "GET">SACAR TURNO</a>
+</div>
+<div style="margin-top: 20px;text-align: center;">
+    <label class="sr-only" for="inlineFormInputGroupUsername2">Filtros</label>
+    <div class="mb-2 ml-sm-2" style="margin-left: 10px;">
+        <div class="dropdown">
+            {% if emailSelected %}
+                <button class="btn btn-outline-primary" type="button" disabled>
+                    {{email}}
+                </button>
+                <div style="margin-top: 15px;">
+                    <a class="btn btn-primary" href="{{ url_for('centro_turnos', page=1, idCentro=idCentro) }}">Desactivar Filtro</a>
+                </div>
+            {% else %}
+                <button class="btn btn-primary  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                    Filtrar por Email
+                </button>
+            {% endif %}
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for each in correos %}
+                    <a class="dropdown-item" disabled href="{{ url_for('centro_turnos', email=each, page=1, idCentro=idCentro) }}">{{each}}</a>    
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tableContainer">
+    <section class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    {% if not turnos %}
+                        <th><div class="row justify-content-center"><p class="h5" style="color:rgb(255, 255, 255)"><b>¡No hay turnos reservados!</b></p></div></th>
+                    {% else %}
+                        <th scope="col">Email</th>  
+                        <th scope="col">Telefono</th> 
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Horario</th>
+                        <th scope="col"></th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for turno in turnos %}
+                    <tr>
+                        <th scope="row">{{ turno.email_contacto }}</th>
+                        <td>{{ turno.telefono_contacto }}</td>
+                        <td>{{ turno.fecha }}</td>
+                        <td>{{ turno.hora_inicio }} - {{ turno.hora_fin }} </td>
+                        <td><a href="{{url_for('eliminar_turno',idTurno=turno.id, idCentro=idCentro)}}" class="btn btn-outline-danger" onclick="return confirm('¿Esta seguro que desea eliminar este turno?')">ELIMINAR</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
+
+{% if paginacion["hay_turnos"]%}
+    <nav aria-label="Page navigation example" style="margin-top: 1%;">
+        <ul class="pagination justify-content-center">
+            {% if paginacion["has_prev"] %}
+            <li class= "page-item"><a class="page-link" href="{{ url_for('centro_turnos', email=email, page=paginacion['prev_page'], idCentro=idCentro) }}">Anterior</a></li>
+            {% endif %}
+
+            <!-- all page numbers -->
+            {% for page_num in paginacion["pages"] %}
+                {% if page_num %}
+                    {% if page_num != paginacion["page"] %}
+                    <li class="page-item"><a class="page-link" href="{{ url_for('centro_turnos', email=email, page=page_num, idCentro=idCentro) }}">{{ page_num }}</a></li>
+                    {% else %}
+                        <li class="page-item active">
+                            <a class="page-link" href="#">{{ page_num }} <span class="sr-only">(current)</span></a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    <li>
+                        <span class="ellipsis" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">…</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <!-- next page -->
+            {% if paginacion["has_next"] %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('centro_turnos', email=email, page=paginacion['next_page'], idCentro=idCentro) }}">Próximo</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{%endif%}
+
+{% endblock %}

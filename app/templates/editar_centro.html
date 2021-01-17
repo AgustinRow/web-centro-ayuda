@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block title %}
+    Editar Centro
+{% endblock %}
+{% block head %}
+    {{ super() }}
+    <!-- -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_nuevo_centro.css') }}" />
+
+     <!--LeafLet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+    <!-- Import ajax and jquery resources-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+    <!--Import Time picker -->
+    <script src="https://www.jonthornton.com/jquery-timepicker/jquery.timepicker.js"></script>
+    <link rel="stylesheet"  href="https://www.jonthornton.com/jquery-timepicker/jquery.timepicker.css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    
+    <!--Import Date-Pair -->
+    <script src="https://jonthornton.github.io/Datepair.js/dist/datepair.js"></script>
+    <script src="https://jonthornton.github.io/Datepair.js/dist/jquery.datepair.js"></script>
+    <!-- -->
+
+{% endblock %}
+{% block main_frame %}
+<div class="modal-dialog text-center">
+    <p class="cartel">Formulario Editar Centro</p>
+    <div class="modal-dialog text-center">  
+        <div class="modal-content">
+            <form id="formulario"action="{{ url_for('centro_guardar_edicion', id= centro.id)}}" onchange="inputChangeEvent" class="col-12" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label style="margin-top: 15px;"> Nombre Centro </label>
+            
+                   <br><input required type="Nombre"  class="form-control" name="nombreCentro" value="{{centro.nombre}}">
+                </div>
+                <div class="form-group">
+                   <label> Direccion </label>
+                   <br><input required type="Apellido"  class="form-control" name="direccionCentro" value="{{centro.direccion}}">
+                </div>
+                <div class="form-group">
+                   <label> Tipo de Centro </label>
+                   <br><select required class="selectpicker form-control" name="tipoCentro" id="tipoCentro">
+                    <option value=""> --Seleccionar Tipo de Centro-- </option> 
+                    {%for each in tipos%}}
+                        {%if each.nombre == centro.tipo%}   
+                            <option selected value="{{each.nombre}}" >{{each.nombre}}</option>
+                        {%else%}
+                            <option value="{{each.nombre}}" >{{each.nombre}}</option>
+                        {%endif%}
+                    {%endfor%}  
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label> Municipio </label>
+                   <br>
+                    <select required class="form-control" name="municipioCentro" id="municipioCentro">
+                        <option value="{{centro.municipio}}" hidden ></option>
+                         
+                      </select>
+                </div>
+                
+                
+                <div class="form-group" id="datepair">
+                    <label> Horario atencion Centro </label>
+                    <br>
+                    <input required class="time start col-lg-12 " type="text" name="horaApertura" value= {{centro.horario_apertura}}/> to 
+                    <br>
+                    <input required class="time end col-lg-12" type="text" name="horaCierre" value="{{centro.horario_cierra}}"/>
+                </div>
+                
+                <div class="form-group">
+                    <label> Telefono </label>
+                     <br><input required type="tel"  class="form-control" name="telefonoCentro" value="{{centro.telefono}}">
+                </div>
+                <div class="form-group">
+                    <label> Web </label>
+                     <br><input type="text"  class="form-control" name="webCentro" value="{{centro.web}}">
+                </div>
+                <div class="form-group">
+                    <label> Email </label>
+                     <br><input type="email"  class="form-control" name="emailCentro" value="{{centro.email}}">
+                </div>
+                <div class="form-group">
+                    <label for="inputFile">Archivo de Protocolo</label>
+                        <input type="file" class="btn btn-info-file" id="inputFile" name="inputFile" accept=".pdf" value="{{centro.protocolo}}">
+                </div>
+                <div>
+                    <input type="text" name= "latitudCentro" id="latitudCentro" hidden value= "{{centro.latitud}}">
+                </div>
+                <div>
+                    <input type="text" name= "longitudCentro" id="longitudCentro" hidden value= "{{centro.longitud}}">
+                </div>
+
+                <div id="mapid" style="height: 500px; width: 100%;" id= "coordenadasCentro">   
+                </div>
+                <div>
+                <br><button id= "btn-cambios" class="btn btn-info" type="submit" name="submit" disabled>Confirmar Cambios</button>
+                <a href="{{url_for('listado_centros', page=1)}}" onclick="return confirm('¿Esta seguro que desea cancelar la edicion del centro? Se perderan todos los cambios')" role="button" class='btn btn-danger'>Rechazar Cambios</a>
+                <br><br>
+                </div>
+
+
+            </form>
+</div>
+
+ <!--Render map and functionality -->
+<script src= "{{ url_for('static', filename='src/maphandler.js') }}"></script>
+ <!--Fetch API municipios -->
+<script src= "{{ url_for('static', filename='src/municipios.js') }}"></script>
+<script>
+    //Soluciona para el timepicker
+$("#datepair .time").timepicker({
+  showDuration: true,
+  minTime: "9:00",
+  maxTime: "16:00",
+  timeFormat: "H:i",
+});
+
+var timeOnlyExampleEl = document.getElementById("datepair");
+var timeOnlyDatepair = new Datepair(timeOnlyExampleEl);
+
+
+function inputChangeEvent(){
+   $("#btn-cambios").attr("disabled", false);
+}
+
+$('#formulario').on('change', inputChangeEvent)
+
+</script>
+{% endblock %}

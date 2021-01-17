@@ -1,0 +1,281 @@
+{% extends 'C:\Users\usuario\Desktop\FACULTAD CUARENTENA\SEGUNDO SEMESTRE\Proyecto de Software\templatesProyecto\base.html' %}
+
+{% load static %}
+{% block main_frame %}
+<style>
+  .cartel{
+    text-transform: uppercase;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: normal;font-weight: 900;
+    font-size: 28px;
+    line-height: 48px;
+    text-align: center;
+    color: rgba(27, 53, 99, 0.95); 
+    text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.15);
+  }
+  .botonNuevo{
+    background: #047483;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 900; 
+    font-size: 20px; 
+    line-height: 26px; 
+    text-align: center; 
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase; 
+    float: right;
+    margin-top: -20px;
+    margin-right: 15%;
+  }
+
+  .botonNuevo:hover{
+    background: #0474838a;
+  }
+
+  th, td{
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  table{
+    background-color: #23A6B7;
+    opacity: 0.85;
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.35), inset 10px 10px 4px rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    width: 1350px;
+    margin-top: 25px;
+  }
+
+  thead{
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+</style>
+<div>
+  <center><p class="cartel">Listado de centros de ayuda</p></center>
+  <a href="/nuevoCentro"><button class="botonNuevo">Nuevo Centro</button></a>
+  <center>
+    <table>
+      <thead>
+          <tr>
+              <th scope="col">
+                  <div class="text">ID</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div>
+              </th>
+              <th scope="col">
+                <div class="text">NOMBRE</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div>
+              </th>
+              <th scope="col">
+                <div class="text">CATEGORIA</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div>
+              </th>
+              <th scope="col">
+                <div class="text">DESCRIPCION</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div> 
+              </th>
+              <th scope="col">
+                <div class="text">UBICACION</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div> 
+              </th>
+              <th scope="col">
+                <div class="text">HORARIO</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div>
+              </th>
+              <th scope="col">
+                <div class="text">CONTACTO</div>
+              </th>  
+          </tr>
+      </thead>
+      <tbody>
+          {% for each in usuarios %}
+              <tr class="model-user">
+                  <td>154</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>Caritas La Plata</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>Ropa</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>Tomamos donaciones para los niños promoviendo la pastoral caritativa de la iglesia catolica</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>Calle 4 883, La Plata</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>8:00 a 16:00</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>caritaslaplata@yahoo.com.ar</td>
+              </tr>
+              <tr class="model-user">
+                <td>154</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>Caritas La Plata</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>Ropa</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>Tomamos donaciones para los niños promoviendo la pastoral caritativa de la iglesia catolica</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>Calle 4 883, La {% extends 'C:\Users\usuario\Desktop\FACULTAD CUARENTENA\SEGUNDO SEMESTRE\Proyecto de Software\templatesProyecto\base.html' %}
+
+{% load static %}
+{% block main_frame %}
+<style>
+  .cartel{
+    text-transform: uppercase;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: normal;font-weight: 900;
+    font-size: 28px;
+    line-height: 48px;
+    text-align: center;
+    color: rgba(27, 53, 99, 0.95); 
+    text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.15);
+  }
+  .botonNuevo{
+    background: #047483;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 900; 
+    font-size: 20px; 
+    line-height: 26px; 
+    text-align: center; 
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase; 
+    float: right;
+    margin-top: -20px;
+    margin-right: 15%;
+  }
+
+  .botonNuevo:hover{
+    background: #0474838a;
+  }
+
+  th, td{
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  table{
+    background-color: #23A6B7;
+    opacity: 0.85;
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.35), inset 10px 10px 4px rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+    width: 1350px;
+    margin-top: 25px;
+  }
+
+  thead{
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+</style>
+<div>
+  <center><p class="cartel">Listado de centros de ayuda</p></center>
+  <a href="/nuevoCentro"><button class="botonNuevo">Nuevo Centro</button></a>
+  <center>
+    <table>
+      <thead>
+          <tr>
+              <th scope="col">
+                  <div class="text">ID</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div>
+              </th>
+              <th scope="col">
+                <div class="text">NOMBRE</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div>
+              </th>
+              <th scope="col">
+                <div class="text">CATEGORIA</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div>
+              </th>
+              <th scope="col">
+                <div class="text">DESCRIPCION</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div> 
+              </th>
+              <th scope="col">
+                <div class="text">UBICACION</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div> 
+              </th>
+              <th scope="col">
+                <div class="text">HORARIO</div>
+              </th>
+              <th scope="col">
+                  <div class="text">|</div>
+              </th>
+              <th scope="col">
+                <div class="text">CONTACTO</div>
+              </th>  
+          </tr>
+      </thead>
+      <tbody>
+          {% for each in usuarios %}
+              <tr class="model-user">
+                  <td>154</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>Caritas La Plata</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>Ropa</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>Tomamos donaciones para los niños promoviendo la pastoral caritativa de la iglesia catolica</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>Calle 4 883, La Plata</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>8:00 a 16:00</td>
+                  <td><div class="text">|</div><div class="clear"></div></td>
+                  <td>caritaslaplata@yahoo.com.ar</td>
+              </tr>
+              <tr class="model-user">
+                <td>154</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>Caritas La Plata</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>Ropa</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>Tomamos donaciones para los niños promoviendo la pastoral caritativa de la iglesia catolica</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>Calle 4 883, La Plata</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>8:00 a 16:00</td>
+                <td><div class="text">|</div><div class="clear"></div></td>
+                <td>caritaslaplata@yahoo.com.ar</td>
+            </tr>
+            <tr class="model-user">
+              <td>154</td>
+              <td><div class="text">|</div><div class="clear"></div></td>
+              <td>Caritas La Plata</td>
+              <td><div class="text">|</div><div class="clear"></div></td>
+              <td>Ropa</td>
+              <td><div class="text">|</div><div class="clear"></div></td>
+              <td>Tomamos donaciones para los niños promoviendo la pastoral caritativa de la iglesia catolica</td>
+              <td><div class="text">|</div><div class="clear"></div></td>
+              <td>Calle 4 883, La Plata</td>
+              <td><div class="text">|</div><div class="clear"></div></td>
+              <td>8:00 a 16:00</td>
+              <td><div class="text">|</div><div class="clear"></div></td>
+              <td>caritaslaplata@yahoo.com.ar</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+</table>
+</center>
+</div>
+{% endblock %}

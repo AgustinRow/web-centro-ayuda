@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}
+    Configuracion del Sitio
+{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='style_configuracionSitio.css') }}" />
+{% endblock %} 
+{% block main_frame %}
+    <div class="mainblock">
+        <p class="cartel">Configuracion del Sitio</p>
+        <div class="formContainer">
+            <div class="mensajes">
+                {% with errors= get_flashed_messages(category_filter=["error"])%}
+                    {% if errors %}
+                        {% for messages in errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ messages }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}     
+                {% endwith %}
+                {% with success= get_flashed_messages(category_filter=["success"])%}
+                    {% if success %}
+                        {% for messages in success %}
+                            <div class="alert alert-success" role="alert">
+                                {{ messages }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}     
+                {% endwith %}
+            </div>
+            <div class="form-configuration">
+                <div style="margin-bottom: 2%;">
+                    {% if sitio.habilitado_al_publico %}
+                        <a href="{{url_for('sitio_modificarHabilitacion')}}"><button class="btn btn-danger btn-block'" onclick="return confirm('¿Esta seguro que desea deshabilitar el sitio?\nSolo podran loguearse usuarios con rol Administrador y se inhabilitara el sitio público')" >DESHABILITAR SITIO</button></a>
+                    {% else %}
+                        <a href="{{url_for('sitio_modificarHabilitacion')}}"><button class="btn btn-success btn-block'" onclick="return confirm('¿Esta seguro que desea deshabilitar el sitio?\nTodos los usuarios podran loguearse y se habilitara el sitio público')" >HABILITAR SITIO</button></a>
+                        
+                    {% endif %}
+                    
+                </div>
+                <form action="{{url_for('configuracion_sitio_guardar')}}" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Titulo</label>
+                            <input type="text" class="form-control" id="inputEmail4" name="titulo" placeholder="Titulo" value="{{sitio.titulo}}">
+                            <label for="inputAddress">Cantidad de Elementos por Pagina</label>
+                            <select id="inputState" name="elementos_por_pagina" class="form-control">
+                                {% if sitio.elementos_por_pagina == 3%}
+                                    <option selected>3</option> 
+                                {% else %}
+                                    <option>3</option> 
+                                {% endif %}
+                                {% if sitio.elementos_por_pagina == 5%}
+                                    <option selected>5</option> 
+                                {% else %}
+                                    <option>5</option> 
+                                {% endif %}
+                                {% if sitio.elementos_por_pagina == 10%}
+                                    <option selected>10</option> 
+                                {% else %}
+                                    <option>10</option> 
+                                {% endif %}
+                                {% if sitio.elementos_por_pagina == 15%}
+                                    <option selected>15</option> 
+                                {% else %}
+                                    <option>15</option> 
+                                {% endif %}
+                                {% if sitio.elementos_por_pagina == 20%}
+                                    <option selected>20</option> 
+                                {% else %}
+                                    <option>20</option> 
+                                {% endif %}
+                            </select>
+                            <label for="inputAddress2">Introduccion</label>
+                            <textarea class="form-control" name="introduccion" id="exampleFormControlTextarea1" placeholder="Presentacion del sitio" rows="3">{{sitio.introduccion}}</textarea>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Contacto</label>
+                            <div class="form-group col-md-6" style="margin-left: 5%;">
+                                <label for="inputEmail4">Telefono</label>
+                                <input type="number" name="telefono" class="form-control" id="inputEmail4" placeholder="Telefono" value="{{sitio.contacto_telefono}}">
+                                <label for="inputEmail4">Correo Electronico</label>
+                                <input type="email" class="form-control" name="email" id="inputEmail4" placeholder="Correo Electronico" value="{{sitio.contacto_email}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <div style="text-align: center; margin-top: 1%;">
+                        <button type="submit" class="btn btn-primary btn-lg" style="text-transform: capitalize; font-weight: bold;">Actualizar configuracion</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

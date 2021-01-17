@@ -1,0 +1,45 @@
+{% extends 'listado_usuarios.html' %}
+{% block title %}
+    Usuarios
+{% endblock %}
+{% block head %}
+{{super()}}
+<link rel="stylesheet" href="{{ url_for('static', filename='style_edicionUsuarios.css') }}" />
+{% endblock %}
+{% block main_frame %}
+<p class="cartel">Edicion de Usuario</p>
+<div class="col-sm-8 main-section">
+  {% with messages= get_flashed_messages()%}
+    {% if messages %}
+      {% for messages in messages%}
+        <div class="alert alert-danger" role="alert">
+          {{ messages }}
+        </div>
+      {% endfor %}  
+    {% endif %}     
+  {% endwith %}
+</div>
+<div class="modal-dialog text-center">  
+      <div class="modal-content">
+          <form action="{{ url_for('usuario_guardar_edicion', id=user.id)}}" class="col-12" method="POST">
+              <div class="form-group">
+                <label style="margin-top: 15px;"> Nuevo nombre </label>
+                 <br><input type="Nombre" required class="form-control" name="nombreUsuario" value="{{user.first_name}}">
+              </div>
+              <div class="form-group">
+                 <label> Nuevo Apellido </label>
+                 <br><input type="Apellido" required class="form-control" name="apellidoUsuario" value="{{user.last_name}}">
+              </div>
+              <div class="form-group">
+                 <label> Nuevo email </label>
+                 <br><input type="Email" required class="form-control" name="emailUsuario" value="{{user.email}}">
+              </div>
+              <div class="form-group">
+                <label> Nuevo username </label>
+                 <br><input type="Username" required class="form-control" name="usernameUsuario" value="{{user.username}}">
+              </div>
+              <br><button class="btn btn-info" type="submit" name="submit">Confirmar Cambios</button><br><br>
+          </form>
+      </div>
+
+{% endblock %}

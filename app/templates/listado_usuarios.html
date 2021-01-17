@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% block title %}
+    Usuarios
+{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='style_listadoCentros.css') }}" />
+{% endblock %}
+{% block main_frame %}
+<p class="cartel">Listado de Usuarios del Sistema</p>
+<div style="text-align: center;">
+    <button type="button" data-toggle="collapse" data-target="#formNewUser" aria-expanded="false" aria-controls="formNewUser" class="btn btn-outline-primary">NUEVO USUARIO</button>
+</div>
+<div class="formContainer" style="margin-top: 25px;">
+    {% with errors= get_flashed_messages(category_filter=["error"])%}
+        {% if errors %}
+            {% for messages in errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ messages }}
+                </div>
+            {% endfor %}
+        {% endif %}     
+    {% endwith %}
+    {% with success= get_flashed_messages(category_filter=["success"])%}
+        {% if success %}
+            {% for messages in success %}
+                <div class="alert alert-success" role="alert">
+                    {{ messages }}
+                </div>
+            {% endfor %}
+        {% endif %}     
+    {% endwith %}
+    {% with warning= get_flashed_messages(category_filter=["warning"])%}
+        {% if warning %}
+            {% for messages in warning %}
+                <div class="alert alert-warning" role="alert">
+                    {{ messages }}
+                </div>
+            {% endfor %}
+        {% endif %}     
+    {% endwith %}
+</div>
+<div class="collapse multi-collapse" id="formNewUser">
+    <div class="formContainer">
+        <form action="{{url_for('usuario_create')}}" method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Username</label>
+                    <input type="text" class="form-control" id="inputEmail4" name="usernameUsuario" placeholder="Username">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputPassword4">Password</label>
+                    <input type="password" class="form-control" id="inputPassword4" name="passwordUsuario" placeholder="Password">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputPassword4">Rol</label><br>
+                    <select style="width: 100%;" id="inputPassword4" name="rolUsuario">
+                        {% for each in roles %}
+                            {% if each.nombre == "Operador" %}
+                                <option selected >{{each.nombre}}</option>
+                            {% else %}
+                                <option>{{each.nombre}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputAddress">Nombre</label>
+                    <input type="text" class="form-control" id="inputAddress" name="nombreUsuario" placeholder="Nombre">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputAddress">Apellido</label>
+                    <input type="text" class="form-control" id="inputAddress" name="apellidoUsuario" placeholder="Apellido">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputAddress">Email</label>
+                    <input type="email" class="form-control" id="inputAddress" name="emailUsuario" placeholder="Email">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">AGREGAR</button><br><br>
+        </form>
+    </div>
+</div>
+<form class="form-inline" style="justify-content: center;" action="{{ url_for('busqueda_usuarios') }}" method="POST">
+    <label class="sr-only" for="inlineFormInputName2">Username</label>
+    <input class="form-control mb-2 mr-sm-2" type="search" placeholder="Username" aria-label="Usuarios" name="buscar">
+  
+    <button type="submit" class="btn btn-primary mb-2 mr-sm-2">Buscar</button>
+
+    <label class="sr-only" for="inlineFormInputGroupUsername2">Filtros</label>
+    <div class="mb-2 ml-sm-2" style="margin-left: 10px;">
+        <div class="dropdown">
+            <button class="btn btn-primary  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                Filtrar Usuarios
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{ url_for('usuario_listado', valor=busqueda, page=1, tipo=1) }}">Activos</a>
+                <a class="dropdown-item" href="{{ url_for('usuario_listado', valor=busqueda, page=1, tipo=0) }}">Inactivos</a>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="tableContainer">
+    <section class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    {% if not users %}
+                      <div class="row justify-content-center"><p class="h5" style="color:black"><b>¡No hay usuarios!</b></p></div>
+                      <th><a href=""><button type="button" class="btn btn-info">Añadir Usuario</button></a></th>
+                    {% else %}
+                        <th scope="col">Username</th>   
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Acciones</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users.items %}
+                    <tr>
+                        <th scope="row">{{ user.username }}</th>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.activo %}
+                                Activo
+                            {% else %}
+                                Inactivo
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% for each in user.roles %}
+                                {{each.nombre}}<br>
+                            {% endfor %}
+                        </td>
+                        {% if user.activo %}
+                            <td><a href="{{url_for('usuario_roles', id=user.id)}}" role="button" class='btn btn-outline-success btn-block'>Asignar Rol</a></td>
+                            <td><a href="{{url_for('usuario_cambiar_estado', id=user.id)}}" role="button" class='btn btn-outline-warning btn-block'>Bloquear</a></td>
+                        {% else %}
+                            <td><a href="{{url_for('usuario_cambiar_estado', id=user.id)}}" role="button" class='btn btn-outline-success btn-block'>Activar</a></td>
+                        {% endif %}
+                            <td><a href="{{url_for('usuario_eliminar', id=user.id)}}" role="button" onclick="return confirm('¿Esta seguro que desea eliminar al usuario?')" class='btn btn-outline-danger btn-block'>Eliminar</a></td>
+                            <td><a href="{{url_for('usuario_editar', id=user.id)}}" role="button" class='btn btn-outline-danger btn-block'>Editar</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
+<nav aria-label="Page navigation example" style="margin-top: 1%;">
+    <ul class="pagination justify-content-center">
+        {% if users.has_prev %}
+        <li class= "page-item"><a class="page-link" href="{{ url_for('usuario_listado',valor=busqueda, page=users.prev_num, tipo=tipo) }}">Anterior</a></li>
+        {% endif %}
+
+        <!-- all page numbers -->
+        {% for page_num in users.iter_pages() %}
+            {% if page_num %}
+                {% if page_num != users.page %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('usuario_listado',valor=busqueda, page=page_num, tipo=tipo) }}">{{ page_num }}</a></li>
+                {% else %}
+                    <li class="page-item active">
+                        <a class="page-link" href="#">{{ page_num }} <span class="sr-only">(current)</span></a>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li>
+                    <span class="ellipsis" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">…</span>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        <!-- next page -->
+        {% if users.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ url_for('usuario_listado', valor=busqueda, page=users.next_num, tipo=tipo) }}">Próximo</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+{% endblock %}

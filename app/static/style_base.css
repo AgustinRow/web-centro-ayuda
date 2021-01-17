@@ -1,0 +1,40 @@
+/* Definir todos los divs con posicion absoluta. Quedan liberados de otros divs para moverlos con libertad*/
+
+* {
+    padding: 0px;
+    margin: 0px;
+  
+  }
+
+/* Elementos de Bootstrap */
+
+.navbar-light{
+    background: linear-gradient(90deg,#009AAE 50%,rgba(255,255,255,0)100%), linear-gradient(270deg, #009AAE 50%, rgba(255,255,255,0) 100%), #009AAE !important; 
+    box-shadow: 0px 7px 4px rgba(0,0,0,0.5) !important;
+}
+
+/* Color de fondo del cuerpo de la pagina*/
+body {
+    background-color: #E5E5E5;
+}
+
+.botonNavBar {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    height: 35px;
+    font-size: 15px;
+    margin-right: 15px;
+    padding: 5px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+} 
+
+.botonNavBar:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+

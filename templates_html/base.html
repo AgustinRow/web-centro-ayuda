@@ -1,0 +1,133 @@
+<!doctype html>
+<html long="es">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title> Home </title>
+      <link rel="stylesheet" type="text/css" href="{%  %}">
+      <style>
+        *{
+          margin: 0%;
+          padding: 0%;
+        }
+
+        body{
+          background-color: #E5E5E5;
+        }
+
+        .botonNavBar{
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid #FFFFFF;
+          box-sizing: border-box;
+          box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.3);
+          border-radius: 5px;
+          color: white;
+          font-weight: bold;
+          height: 35px;
+          font-size: 15px;
+          margin-right: 15px;
+          padding: 5px;
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .botonNavBar:hover{
+          background: rgba(255, 255, 255, 0.5);
+        }
+
+        .botonUsuario{
+          background-color: transparent; 
+          border-color: transparent;
+          border-radius: 5px;
+        }
+
+        .botonUsuario:hover{
+          background-color: rgba(255,255,255,0.3);
+        }
+
+        .BarraSuperior{
+          background: linear-gradient(90deg, #009AAE 50%, rgba(255, 255, 255, 0) 100%), linear-gradient(270deg, #009AAE 50%, rgba(255, 255, 255, 0) 100%), #009AAE;
+          box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.5);
+          display: flex;
+          height: 150px;
+        }
+
+        .navUser li a {
+          background-color: rgba(78, 78, 78, 0.3);
+          color: white;
+          text-decoration: none;
+          font-weight: bold;
+          padding: 1px;
+          display: block;
+
+        }
+
+        .navUser li a:hover {
+          background-color:rgba(255, 255, 255, 0.5);
+          color: rgba(00, 00, 00, 0.7);
+
+        }
+
+        .navUser > li {
+          float: left;
+          padding-top: 15px;
+
+        }
+
+        .navUser li ul {
+          display: none;
+          min-width: 140px;
+          top: 0%;
+          padding-top: 15px;
+          padding-bottom: 15px;
+          padding-left: 15px;
+          padding-right:15px ;
+          left: 100%;
+        }
+
+        .navUser li:hover > ul{
+          display: block;
+        }
+
+        #header {
+          margin: auto;
+          margin-left: 80%;
+          font-family: Arial, Helvetica, sans-serif;
+
+        }
+      </style>
+  </head>
+  <body>
+    <!--caja todo-->
+    <div class="BarraSuperior">
+        <!-- LOGO <img style="position: absolute; width: 100%; height: 100%;" src="{% static 'bookflixApp/imagenes/background.jpg' %}">-->
+        <!--barra de navegacion-->
+      <div class="logoProvincia">
+        <img class="logo" src="C:\Users\usuario\Desktop\FACULTAD CUARENTENA\SEGUNDO SEMESTRE\Proyecto de Software\templatesProyecto\elements\qn6IrRy__400x400.png" height="150px">
+      </div>
+      <div style="width: 500px; height: 150px;">
+        <div style="margin-top:35px"> 
+          <p class="header1" style="text-transform: uppercase;font-size: 20px; color: white; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"> Centros de ayuda de la provincia de</p>
+          <p class="header2" style="text-transform: uppercase;font-size: 35px; color: white; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"> <b>Buenos Aires</b></p>
+        </div>
+      </div>
+      <div style="margin-left: 34%; margin-top: 6%; display: inline-block;" >
+        <a href="/ListadoCentrosDeAyuda"><button class="botonNavBar"> LISTADO </button></a>
+        <a href="/ConfiguracioDelSitio"><button class="botonNavBar"> CONFIGURACION </button></a>
+      </div>
+      <div id="header" style="margin-top: 5%; margin-left: 4%;">
+        <ul class="navUser" style="list-style: none;">
+          <li>
+            <button class="botonUsuario"><img height="35px" src="C:\Users\usuario\Desktop\FACULTAD CUARENTENA\SEGUNDO SEMESTRE\Proyecto de Software\templatesProyecto\elements\account.png"></button>
+            <ul style="list-style: none;">
+              <li><a href="/miperfil/">Mi Perfil</a></li>
+              <li><a href="/elegirPerfil/">Cerrar Sesion</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <br><br>
+    {% block main_frame %}{% endblock %}
+  </body>
+</html>

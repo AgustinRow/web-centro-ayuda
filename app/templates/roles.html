@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ROLES</title>
+  </head>
+  <body>
+    <h1>Roles</h1>
+    <div style="margin: 50px;">
+        <form action="/roles" method="POST">
+            Nombre: <input type="text" placeholder="Nombre" name="nombreRol"><br><br>
+            <input type="submit" value="ENVIAR" name="botonEnviar">
+        </form>
+    </div>
+    <div>
+      <ul>
+          {% for each in roles %}
+              <li>
+                  <p>{{each.nombre}}</p>
+              </li>
+          {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>

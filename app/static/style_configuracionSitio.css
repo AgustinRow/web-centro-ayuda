@@ -1,0 +1,30 @@
+.cartel{
+    text-transform: uppercase;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: normal;font-weight: 900;
+    font-size: 28px;
+    line-height: 48px;
+    text-align: center;
+    color: rgba(27, 53, 99, 0.95); 
+    text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.15);
+}
+
+.mensajes{
+    text-align: center;
+}
+
+.formContainer{
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.mainblock{
+    margin-bottom: 2%;
+}
+
+.form-configuration{
+    background: linear-gradient(90deg,#00bcd4 50%,rgba(255,255,255,0)100%), linear-gradient(270deg, #009AAE 50%, rgba(255,255,255,0) 100%), #009AAE !important; 
+    box-shadow: 0px 7px 4px rgba(0,0,0,0.5) !important;
+    border-radius: 15px;
+    padding: 2%;
+}

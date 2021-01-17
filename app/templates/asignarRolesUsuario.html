@@ -1,0 +1,46 @@
+{% extends 'listado_usuarios.html' %}
+{% block title %}
+    Asignar Roles
+{% endblock %}
+{% block head %}
+{{super()}}
+<link rel="stylesheet" href="{{ url_for('static', filename='style_asignacionRoles.css') }}" />
+{% endblock %}
+{% block main_frame %}
+<p class="cartel">Asignacion de Roles<br>@{{usernameUser}}</p>
+<div class="modal-dialog text-center">  
+      <div style="text-align: center;">
+        {% with messages= get_flashed_messages()%}
+          {% if messages %}
+            {% for messages in messages%}
+              <div class="alert alert-danger" role="alert">
+                {{ messages }}
+              </div>
+            {% endfor %}  
+          {% endif %}     
+        {% endwith %}
+      </div>
+      <div class="modal-content">
+            <form action="{{ url_for('usuario_actualizar_roles', id=idUser) }}" method="POST" class="col-12">
+                <p><b>Roles del Usuario</b></p>
+                <div class="form-group sector-roles">
+                    {% for each in rolesU %}
+                        <input type="checkbox" checked  name="{{each.nombre}}" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">{{each.nombre}}</label>
+                        <br>    
+                    {% endfor %}
+                </div>
+                <hr/>
+                <p><b>Roles del Sistema</b></p>
+                <div class="form-group sector-roles">
+                    {% for each in roles %}
+                        <input type="checkbox" class="form-check-input" name="{{each.nombre}}" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">{{each.nombre}}</label>    
+                        <br>
+                    {% endfor %}
+                </div>
+                <br><button class="btn btn-info" type="submit" name="submit">ASIGNAR</button><br><br>
+            </form>
+      </div>
+
+{% endblock %}
