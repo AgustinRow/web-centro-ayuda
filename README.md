@@ -9,6 +9,16 @@ Aplicación desarrollada como trabajo integrador para la cátedra de Proyecto de
 - Valentin Varchioni
 - Chosco Tomas
 
+### Aplicacion
+
+Es una web que se compone de dos vistas.
+
+- Vista lado admin: desarrollada en python Flask y Jinja2. En esta vista se administran la carga y edicion de usuarios y centros de ayuda.
+
+- Vista lado cliente: desarrollada con VueJs
+
+- Dispone de una API Rest publica para la carga de usuario y centros de ayuda desde el lado cliente
+
 ## Inicio ambiente
 
 ### Requisitos
