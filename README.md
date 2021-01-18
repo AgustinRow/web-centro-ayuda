@@ -1,22 +1,24 @@
-#Grupo 16
-Felipe Ornella 16240/0
-Agustin Diaz 10598/3
-Valentin Varchioni 16169/1
-Chosco Tomas 15244/9
+# Proyecto de Software
 
+Aplicación desarrollada como trabajo integrador para la cátedra de Proyecto de Software de la Facultad de Informática de la U.N.L.P.
 
-# Proyecto de Software - Aplicación de ejemplo
+### Participantes
 
-Aplicación de ejemplo para la cátedra de Proyecto de Software de la Facultad de Informática de la U.N.L.P.
+- Felipe Ornella
+- Agustin Diaz
+- Valentin Varchioni
+- Chosco Tomas
 
-## Iniciar ambiente
+## Inicio ambiente
 
 ### Requisitos
 
 - python3
 - virtualenv
+- vuecli
+- npm
 
-### Ejecución
+### Ejecución aplicacion privada
 
 ```bash
 $ virtualenv -p python3 venv
@@ -34,6 +36,14 @@ Para salir del entorno virutal, ejecutar:
 $ deactivate
 ```
 
+### Ejecución aplicacion lado cliente
+
+Para correr en desarrollo
+
+```bash
+$ npm run serve
+```
+
 ## Estructura de carpetas del proyecto
 
 ```bash
@@ -44,9 +54,5 @@ resources         # Módulo con los controladores de la aplicación (parte web)
 templates         # Módulo con los templates
 db.py             # Instancia de base de datos
 __init__.py       # Instancia de la aplicación y ruteo
+web               # Aplicacion publica- lado cliente desarrolada en VUE-Js
 ```
-
-## TODO
-
-- [ ] Usar una hoja de estilos simple para que quede de ejemplo.
->>>>>>> 583d8c9f2368074c7a7e9a96aceef0e8b58ce01a
